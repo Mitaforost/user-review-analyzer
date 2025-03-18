@@ -1,6 +1,7 @@
 # PostgreSQL
 *.sql
 *.dump
+.env
 pgadmin/
 # Logs
 logs/
