@@ -1,0 +1,16 @@
+-- Триггер для автоматического извлечения ключевых слов
+CREATE TRIGGER trg_extract_keywords
+AFTER INSERT ON reviews
+FOR EACH ROW EXECUTE FUNCTION extract_keywords();
+
+-- Триггер, вызывающий функцию при добавлении нового отзыва
+CREATE TRIGGER trigger_update_statistics
+AFTER INSERT ON reviews
+FOR EACH ROW
+EXECUTE FUNCTION update_review_statistics();
+
+-- Триггер для автоматического обновления статистики
+CREATE TRIGGER trg_update_review_statistics  
+AFTER INSERT ON reviews  
+FOR EACH STATEMENT  
+EXECUTE FUNCTION update_review_statistics();

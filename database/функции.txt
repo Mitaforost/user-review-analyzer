@@ -1,0 +1,67 @@
+-- Функция для извлечения ключевых слов из отзывов
+CREATE FUNCTION extract_keywords() RETURNS TRIGGER AS $$
+DECLARE
+    words TEXT[];
+    word TEXT;
+    key_id INT;
+BEGIN
+    words := string_to_array(NEW.review_text, ' ');
+    FOR word IN SELECT unnest(words) LOOP
+        word := lower(word);
+        IF length(word) > 3 THEN  -- Исключаем слишком короткие слова
+            SELECT id INTO key_id FROM keywords WHERE keyword = word;
+            IF key_id IS NULL THEN
+                INSERT INTO keywords (keyword) VALUES (word) RETURNING id INTO key_id;
+            END IF;
+            INSERT INTO review_keywords (review_id, keyword_id, occurrences) VALUES (NEW.id, key_id, 1)
+            ON CONFLICT (review_id, keyword_id) DO UPDATE SET occurrences = review_keywords.occurrences + 1;
+        END IF;
+    END LOOP;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Функция для обновления статистики после добавления нового отзыва
+CREATE OR REPLACE FUNCTION update_review_statistics()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE review_statistics
+    SET 
+        average_rating = (SELECT AVG(rating) FROM reviews),
+        most_popular_keyword = (SELECT keyword FROM keywords k
+                                JOIN review_keywords rk ON k.id = rk.keyword_id
+                                GROUP BY keyword ORDER BY COUNT(*) DESC LIMIT 1),
+        last_updated = NOW();
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Функция для обновления статистики
+CREATE OR REPLACE FUNCTION update_review_statistics() RETURNS TRIGGER AS $$  
+DECLARE  
+    avg_rating DECIMAL(3,2);  
+    popular_keyword TEXT;  
+BEGIN  
+    -- Рассчитываем средний рейтинг  
+    SELECT COALESCE(AVG(rating), 0) INTO avg_rating FROM reviews;  
+
+    -- Определяем самое популярное ключевое слово  
+    SELECT k.keyword  
+    INTO popular_keyword  
+    FROM review_keywords rk  
+    JOIN keywords k ON rk.keyword_id = k.id  
+    GROUP BY k.keyword  
+    ORDER BY SUM(rk.occurrences) DESC  
+    LIMIT 1;  
+
+    -- Обновляем таблицу статистики  
+    INSERT INTO review_statistics (average_rating, most_popular_keyword, last_updated)  
+    VALUES (avg_rating, popular_keyword, NOW())  
+    ON CONFLICT (id) DO UPDATE  
+    SET average_rating = avg_rating,  
+        most_popular_keyword = popular_keyword,  
+        last_updated = NOW();  
+
+    RETURN NULL;  
+END;  
+$$ LANGUAGE plpgsql;

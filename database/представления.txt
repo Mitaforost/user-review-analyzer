@@ -1,0 +1,9 @@
+-- Создание представления для админа (статистика по отзывам)
+CREATE VIEW admin_review_statistics AS
+SELECT 
+    COUNT(*) AS total_reviews,
+    AVG(rating) AS average_rating,
+    (SELECT keyword FROM keywords k
+     JOIN review_keywords rk ON k.id = rk.keyword_id
+     GROUP BY keyword ORDER BY COUNT(*) DESC LIMIT 5) AS top_keywords
+FROM reviews;

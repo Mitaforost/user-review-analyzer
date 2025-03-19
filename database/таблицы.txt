@@ -1,0 +1,48 @@
+-- 1. Таблица пользователей с ролевой моделью (1 - админ, 2 - пользователь)
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash TEXT NOT NULL,
+    role_id INT NOT NULL CHECK (role_id IN (1,2)) DEFAULT 2, -- 1 - админ, 2 - обычный пользователь
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 2. Таблица отзывов
+CREATE TABLE reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    rating INT CHECK (rating BETWEEN 1 AND 5),
+    review_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- 3. Таблица ключевых слов
+CREATE TABLE keywords (
+    id SERIAL PRIMARY KEY,
+    keyword VARCHAR(50) UNIQUE NOT NULL
+);
+
+-- 4. Таблица связи отзывов с ключевыми словами
+CREATE TABLE review_keywords (
+    id SERIAL PRIMARY KEY,
+    review_id INT REFERENCES reviews(id) ON DELETE CASCADE,
+    keyword_id INT REFERENCES keywords(id) ON DELETE CASCADE,
+    occurrences INT DEFAULT 1 -- количество повторений ключевого слова в отзыве
+);
+
+-- 5. Таблица сессий пользователей
+CREATE TABLE sessions (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    session_token TEXT UNIQUE NOT NULL,
+    expires_at TIMESTAMP NOT NULL
+);
+
+-- 6. Таблица статистики отзывов (доступна только администратору)
+CREATE TABLE review_statistics (
+    id SERIAL PRIMARY KEY,
+    average_rating DECIMAL(3,2) DEFAULT 0.00,
+    most_popular_keyword VARCHAR(50),
+    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
