@@ -1,5 +1,4 @@
 # PostgreSQL
-*.sql
 *.dump
 .env
 pgadmin/
