@@ -1,17 +1,29 @@
-const { Keyword } = require('../models');
+const { Keyword, ReviewKeyword } = require('../models');
 
-// Получение списка ключевых слов
+// Получение списка ключевых слов с частотностью
 const getKeywords = async (req, res) => {
     try {
-        const keywords = await Keyword.findAll();
-        return res.json(keywords);
+        const keywords = await Keyword.findAll({
+            include: [{
+                model: ReviewKeyword,
+                attributes: ['occurrences']
+            }]
+        });
+
+        const keywordData = keywords.map(keyword => ({
+            id: keyword.id,
+            keyword: keyword.keyword,
+            occurrences: keyword.ReviewKeywords.reduce((sum, reviewKeyword) => sum + reviewKeyword.occurrences, 0)
+        }));
+
+        return res.json(keywordData);
     } catch (error) {
         console.error("Ошибка при получении ключевых слов:", error);
         return res.status(500).json({ error: "Внутренняя ошибка сервера" });
     }
 };
 
-// Создание нового ключевого слова
+// Остальные функции остаются без изменений
 const createKeyword = async (req, res) => {
     try {
         const { keyword } = req.body;
@@ -28,7 +40,6 @@ const createKeyword = async (req, res) => {
     }
 };
 
-// Редактирование ключевого слова
 const updateKeyword = async (req, res) => {
     try {
         const keywordId = req.params.id;
@@ -51,7 +62,6 @@ const updateKeyword = async (req, res) => {
     }
 };
 
-// Удаление ключевого слова
 const deleteKeyword = async (req, res) => {
     try {
         const keywordId = req.params.id;

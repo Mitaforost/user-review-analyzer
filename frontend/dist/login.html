@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="Описание cайта">
+<!--    <link rel="icon" href="/img/icon/favicon.ico" type="image/x-icon">-->
+<!--    <link rel="apple-touch-icon" sizes="180x180" href="/img/icon/apple-touch-icon.png">-->
+<!--    <link rel="icon" type="image/png" sizes="192x192"  href="/img/icon/android-chrome-192x192.png">-->
+<!--    <link rel="icon" type="image/png" sizes="512x512" href="/img/icon/android-chrome-512x512.png">-->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cервис для анализа отзывов пользователей</title>
+</head>
+
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <a href="index.html" class="header__home">
+                <h1>Online сервис для анализа отзывов пользователей</h1>
+            </a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="auth">
+        <div class="auth__wrapper">
+            <h1 class="auth__title">Авторизация</h1>
+            <form id="loginForm" class="auth__loginForm">
+                <input type="text" id="username" placeholder="Введите логин" required>
+                <input type="password" id="password" placeholder="Введите пароль" required>
+                <p class="auth__eyes">Показать пароль <span id="togglePassword">👁️</span></p>
+                <button type="submit" class="btn btn__auth">Войти</button>
+            </form>
+            <p><a href="register.html" class="btn auth__link">Зарегистрируйтесь</a></p>
+        </div>
+        </section>
+</main>
+<script src="js/auth.js"></script>
+</body>
+</html>

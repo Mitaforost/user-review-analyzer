@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ru">
+@@include('html/head.html')
+<body>
+@@include('html/header-two.html')
+<main>
+    <section class="auth">
+        <div class="auth__wrapper">
+            <h1 class="auth__title">Авторизация</h1>
+            <form id="registerForm" class="auth__loginForm">
+                <input type="text" id="name" placeholder="Имя" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <input type="password" id="password" placeholder="Пароль" required>
+                <p class="auth__eyes">Показать пароль <span id="togglePassword">👁️</span></p>
+                <button type="submit" class="btn btn__auth">Зарегистрироваться</button>
+            </form>
+            <p><a href="login.html" class="btn auth__link">Войти</a></p>
+        </div>
+    </section>
+</main>
+<script src="js/register.js"></script>
+</body>
+</html>

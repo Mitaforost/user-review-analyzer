@@ -1,0 +1,55 @@
+.header{
+  padding: 20px 0;
+  background-color: $header-bg;
+  &__home{
+    h1{
+      color: $main-color;
+      &:hover{
+        color: $success-color;
+      }
+    }
+  }
+  &__wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  &__nav{
+    max-width: 700px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    a{
+      color: $main-color;
+      &:hover{
+        color: $success-color;
+      }
+    }
+  }
+  &__user{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: right;
+    margin-bottom: 40px;
+  }
+  &__status{
+    display: flex;
+    align-items: center;
+    p{
+      text-align: center;
+      width: 100%;
+      padding: 5px 10px;
+      background-color: $primary-color;
+      color: $main-color;
+      span{
+        display: inline-block;
+      }
+    }
+  }
+  .btn__exit{
+    width: 100px;
+  }
+}

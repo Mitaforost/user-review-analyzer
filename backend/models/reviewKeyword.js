@@ -1,5 +1,7 @@
-module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('ReviewKeyword', {
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
+    const ReviewKeyword = sequelize.define('ReviewKeyword', {
         review_id: { type: DataTypes.INTEGER, allowNull: false },
         keyword_id: { type: DataTypes.INTEGER, allowNull: false },
         occurrences: { type: DataTypes.INTEGER, defaultValue: 1 },
@@ -13,4 +15,10 @@ module.exports = (sequelize, DataTypes) => {
             }
         ]
     });
+
+    ReviewKeyword.associate = (models) => {
+        ReviewKeyword.belongsTo(models.Keyword, { foreignKey: 'keyword_id' });
+    };
+
+    return ReviewKeyword;
 };

@@ -12,8 +12,8 @@ const login = async (req, res) => {
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
-        // Validate the password
-        if (user.password_hash !== password) {
+        // Validate the password (assuming passwords are stored securely with hashing, modify accordingly)
+        if (user.password !== password) {  // Ideally, use a hashed comparison here
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
@@ -43,12 +43,12 @@ const register = async (req, res) => {
             return res.status(400).json({ error: "Username already exists" });
         }
 
-        // Create a new user
+        // Create a new user (Note: Make sure passwords are hashed before saving)
         const newUser = await User.create({
             username,
-            password_hash: password,
+            password, // In a real app, hash the password here before saving
             email,
-            role_id: 2  // Default role is user
+            role_id: 2  // Assuming the default role is 3
         });
 
         return res.status(201).json({ message: "User registered successfully!" });

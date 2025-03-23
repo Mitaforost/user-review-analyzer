@@ -34,6 +34,11 @@ Keyword.hasMany(ReviewKeyword, { foreignKey: 'keyword_id', onDelete: 'CASCADE' }
 Session.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 User.hasMany(Session, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 
+// Define associations for ReviewStatistic if necessary
+// For example, if ReviewStatistic is related to User or Review, define these associations here
+// ReviewStatistic.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+// User.hasMany(ReviewStatistic, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+
 module.exports = {
     sequelize,
     Role,

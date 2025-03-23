@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+@@include('html/head.html')
+<body>
+@@include('html/header.html')
+<main>
+    <section class="review-section">
+        <div class="container">
+            <h2>Добавить отзыв</h2>
+
+            <div id="computerQuestion">
+                <label for="computerUsage">Какую основную задачу вы выполняете на своем компьютере?</label>
+                <select id="computerUsage">
+                    <option value="work">Работа</option>
+                    <option value="gaming">Игры</option>
+                    <option value="study">Учёба</option>
+                    <option value="browsing">Серфинг в интернете</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+
+            <div id="reviewFormContainer">
+                <label for="reviewText">Отзыв:</label>
+                <textarea id="reviewText" rows="4" cols="50"></textarea>
+
+                <label for="reviewRating">Оценка:</label>
+                <select id="reviewRating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <button id="submitReviewBtn" class="btn">Отправить отзыв</button>
+            </div>
+        </div>
+    </section>
+</main>
+@@include('html/footer.html')
+<script src="js/add_review.js"></script>
+</body>
+</html>

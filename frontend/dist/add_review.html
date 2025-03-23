@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="description" content="Описание cайта">
+<!--    <link rel="icon" href="/img/icon/favicon.ico" type="image/x-icon">-->
+<!--    <link rel="apple-touch-icon" sizes="180x180" href="/img/icon/apple-touch-icon.png">-->
+<!--    <link rel="icon" type="image/png" sizes="192x192"  href="/img/icon/android-chrome-192x192.png">-->
+<!--    <link rel="icon" type="image/png" sizes="512x512" href="/img/icon/android-chrome-512x512.png">-->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Cервис для анализа отзывов пользователей</title>
+</head>
+
+<body>
+<header class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <a href="index.html" class="header__home">
+                <h1>Online сервис</h1>
+            </a>
+            <nav class="header__nav">
+                <a href="add_review.html">Текстовый отзыв</a>
+                <a href="reviews.html">Просмотр всех отзывов</a>
+                <a href="statistics.html">Просмотр статистики</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="review-section">
+        <div class="container">
+            <h2>Добавить отзыв</h2>
+
+            <div id="computerQuestion">
+                <label for="computerUsage">Какую основную задачу вы выполняете на своем компьютере?</label>
+                <select id="computerUsage">
+                    <option value="work">Работа</option>
+                    <option value="gaming">Игры</option>
+                    <option value="study">Учёба</option>
+                    <option value="browsing">Серфинг в интернете</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+
+            <div id="reviewFormContainer">
+                <label for="reviewText">Отзыв:</label>
+                <textarea id="reviewText" rows="4" cols="50"></textarea>
+
+                <label for="reviewRating">Оценка:</label>
+                <select id="reviewRating">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+
+                <button id="submitReviewBtn" class="btn">Отправить отзыв</button>
+            </div>
+        </div>
+    </section>
+</main>
+<footer class="footer">
+    <div class="container">
+        <p class="footer__title">Online сервис для анализа отзывов пользователей</p>
+    </div>
+</footer>
+
+<script src="js/add_review.js"></script>
+</body>
+</html>

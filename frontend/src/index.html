@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+@@include('html/head.html')
+<body>
+@@include('html/header.html')
+<main>
+    <section class="overview">
+        <div class="container">
+            <div class="header__user">
+                <p id="userInfo" class="header__status p1"></p>
+                <button id="logoutBtn" class="btn btn__exit" style="display: none;">Выйти</button>
+            </div>
+            <h2 class="overview__title">Управление</h2>
+            <div class="overview__wrapper">
+                <div class="overview__item overview-item">
+                    <h3 class="overview-item__title">Добавить отзыв</h3>
+                    <p class="overview-item__text">Оставить текстовый отзыв с оценкой</p>
+                    <a href="add_review.html" class="overview-item__link btn">Перейти</a>
+                </div>
+                <div class="overview__item overview-item">
+                    <h3 class="overview-item__title">Отзывы</h3>
+                    <p class="overview-item__text">Фильтрация и просмотр всех отзывов</p>
+                    <a href="reviews.html" class="overview-item__link btn">Перейти</a>
+                </div>
+                <div class="overview__item overview-item">
+                    <h3 class="overview-item__title">Статистика</h3>
+                    <p class="overview-item__text">Просмотр статистики отзывов</p>
+                    <a href="statistics.html" class="overview-item__link btn">Перейти</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<div id="logoutPopup" class="popup">
+    <div class="popup__content">
+        <p>Выйти из системы</p>
+        <div class="popup__actions">
+            <button id="confirmLogout" class="btn">Да</button>
+            <button id="cancelLogout" class="btn">Отмена</button>
+        </div>
+    </div>
+</div>
+@@include('html/footer.html')
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: $background-light;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  th, td {
+    padding: 12px 15px;
+    text-align: center;
+    border-bottom: 1px solid $primary-color;
+  }
+
+  th {
+    background: $secondary-color;
+    color: $main-color;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  tr:hover {
+    background: lighten($background-light, 5%);
+  }
+
+  // Стили для редактируемых ячеек
+  td.editable {
+    cursor: pointer;
+    position: relative;
+    //transition: background 0.3s ease-in-out;
+    //
+    //&:hover {
+    //  background: lighten($primary-color, 40%);
+    //}
+    //
+    //&:focus {
+    //  background: lighten($primary-color, 50%);
+    //}
+  }
+
+  // Стили для кнопок редактирования и удаления
+  td {
+    position: relative;
+  }
+}
